@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NilfgarD_Helper", "NilfgarD_Helper\NilfgarD_Helper.csproj", "{04D73532-DA70-49BD-A875-4EFF9C469292}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyAddonsForVkNet", "MyAddonsForVkNet\MyAddonsForVkNet.csproj", "{FA373290-94E2-4D94-A79A-E900F2F398CA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{04D73532-DA70-49BD-A875-4EFF9C469292}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04D73532-DA70-49BD-A875-4EFF9C469292}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04D73532-DA70-49BD-A875-4EFF9C469292}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04D73532-DA70-49BD-A875-4EFF9C469292}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA373290-94E2-4D94-A79A-E900F2F398CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA373290-94E2-4D94-A79A-E900F2F398CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA373290-94E2-4D94-A79A-E900F2F398CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA373290-94E2-4D94-A79A-E900F2F398CA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

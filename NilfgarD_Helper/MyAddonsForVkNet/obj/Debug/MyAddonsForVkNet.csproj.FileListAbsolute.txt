@@ -1,0 +1,14 @@
+C:\Users\Sergey\Desktop\SpecialForVk\NilfgarD_Helper\MyAddonsForVkNet\bin\Debug\MyAddonsForVkNet.dll.config
+C:\Users\Sergey\Desktop\SpecialForVk\NilfgarD_Helper\MyAddonsForVkNet\bin\Debug\MyAddonsForVkNet.dll
+C:\Users\Sergey\Desktop\SpecialForVk\NilfgarD_Helper\MyAddonsForVkNet\bin\Debug\MyAddonsForVkNet.pdb
+C:\Users\Sergey\Desktop\SpecialForVk\NilfgarD_Helper\MyAddonsForVkNet\bin\Debug\HtmlAgilityPack.dll
+C:\Users\Sergey\Desktop\SpecialForVk\NilfgarD_Helper\MyAddonsForVkNet\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Sergey\Desktop\SpecialForVk\NilfgarD_Helper\MyAddonsForVkNet\bin\Debug\VkNet.dll
+C:\Users\Sergey\Desktop\SpecialForVk\NilfgarD_Helper\MyAddonsForVkNet\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\Sergey\Desktop\SpecialForVk\NilfgarD_Helper\MyAddonsForVkNet\bin\Debug\HtmlAgilityPack.xml
+C:\Users\Sergey\Desktop\SpecialForVk\NilfgarD_Helper\MyAddonsForVkNet\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Sergey\Desktop\SpecialForVk\NilfgarD_Helper\MyAddonsForVkNet\bin\Debug\VkNet.pdb
+C:\Users\Sergey\Desktop\SpecialForVk\NilfgarD_Helper\MyAddonsForVkNet\bin\Debug\VkNet.xml
+C:\Users\Sergey\Desktop\SpecialForVk\NilfgarD_Helper\MyAddonsForVkNet\obj\Debug\MyAddonsForVkNet.dll
+C:\Users\Sergey\Desktop\SpecialForVk\NilfgarD_Helper\MyAddonsForVkNet\obj\Debug\MyAddonsForVkNet.pdb
+C:\Users\Sergey\Desktop\SpecialForVk\NilfgarD_Helper\MyAddonsForVkNet\obj\Debug\MyAddonsForVkNet.csprojResolveAssemblyReference.cache
