@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Web.Script.Serialization;
 using VkNet;
 using VkNet.Utils;
 
@@ -26,6 +24,18 @@ namespace MyAddonsForVkNet
         public string Text { get; set; }
     }
 
+    [JsonObject(MemberSerialization.OptIn)]
+    struct JsonTopic
+    {
+        [JsonProperty("id")]
+        public int Id { get; set; }
+
+        [JsonProperty("comments")]
+        public int Comments { get; set; }
+
+        [JsonProperty("title")]
+        public string Title { get; set; }
+    }
 
     public class MyVkAddons
     {
@@ -114,80 +124,6 @@ namespace MyAddonsForVkNet
             return comments;
         }
 
-        private List<VkBoardMessage> ParseCommentsTokenList(List<string> token)
-        {
-            List<VkBoardMessage> result = new List<VkBoardMessage>();
-            List<string> parsedToken = new List<string>();
-            var input = new List<string>();
-
-            for (int i = 0; i < token.Count; i++)
-            {
-                int startPos = token[i].IndexOf('[') + 1;
-                int endPos = token[i].LastIndexOf(']');
-
-                input.Add(token[i].Substring(startPos, endPos - startPos));
-            }
-
-            for (int i = 0; i < input.Count; i++)
-            {
-                parsedToken.AddRange(ParseTokenByBraces(input[i]));
-            }
-
-            string[] delims = new string[] { ",\"" };
-
-            for (int i = 0; i < parsedToken.Count; i++)
-            {
-                string[] messageInfo = parsedToken[i].Split(delims, StringSplitOptions.RemoveEmptyEntries);
-                result.Add(parseMessageToken(messageInfo));
-            }
-
-            return result;
-        }
-
-        private VkBoardMessage parseMessageToken(string[] tokens)
-        {
-
-            int messageId = 0;
-            int sender = 0;
-            string text = "";
-            for (int i = 0; i < tokens.Length; i++)
-            {
-                string buff = "";
-
-                int typeOfToken = checkMessageToken(tokens[i].Split(':')[0]);
-                if (typeOfToken == -1) continue;
-
-                string[] delims = new string[] { "\":" };
-
-                switch (typeOfToken)
-                {
-                    case 0:
-                        buff = tokens[i].Split(delims, StringSplitOptions.RemoveEmptyEntries)[1];
-                        messageId = int.Parse(buff);
-                        break;
-                    case 1:
-                        buff = tokens[i].Split(delims, StringSplitOptions.RemoveEmptyEntries)[1];
-                        sender = int.Parse(buff);
-                        break;
-                    case 2:
-                        buff = tokens[i].Split(delims, StringSplitOptions.RemoveEmptyEntries)[1];
-                        buff.Replace("<br>", " ");
-                        text = buff;
-                        break;
-                }
-            }
-
-            return new VkBoardMessage() { MessageId = messageId, Sender = sender, Text = text };
-        }
-
-        private int checkMessageToken(string token)
-        {
-            if (token.IndexOf("from_id") != -1) return 1;
-            if (token.IndexOf("id") != -1) return 0;
-            if (token.IndexOf("text") != -1) return 2;
-            return -1;
-        }
-
         public List<VkBoardTopic> GetTopicList(int groupId, VkApi vk)
         {
             var parameters = new VkParameters
@@ -197,99 +133,18 @@ namespace MyAddonsForVkNet
 
             var token = vk.Invoke("board.getTopics", parameters);
 
-            return (ParseTopicListToken(token));
-        }
-
-        private List<string> ParseTokenByBraces(string token)
-        {
-            List<string> parsedInput = new List<string>();
-
-            int startPos = 0;
-            int endPos = 0;
-
-            while (token.IndexOf('{') != -1)
-            {
-                startPos = token.IndexOf('{') + 1;
-                endPos = token.IndexOf("},");
-                int attachment = token.IndexOf("\"attachments\"");
-
-                if (((attachment != -1)) && (attachment < endPos))
-                    endPos = attachment;
-
-                if (endPos == -1)
-                    endPos = token.LastIndexOf('}');
-
-                parsedInput.Add(token.Substring(startPos, endPos - startPos));
-
-                token = token.Substring(endPos + 1);
-            }
-
-            return parsedInput;
-        }
-
-        private List<VkBoardTopic> ParseTopicListToken(string token)
-        {
             List<VkBoardTopic> topics = new List<VkBoardTopic>();
+            Newtonsoft.Json.Linq.JObject obj = Newtonsoft.Json.Linq.JObject.Parse(token);
+            int count = JsonConvert.DeserializeObject<int>(obj["response"]["topics"][0].ToString());
 
-            int startPos = token.IndexOf('[') + 1;
-            int endPos = token.IndexOf(']');
-
-            token = token.Substring(startPos, endPos - startPos);
-
-            List<string> parsedInput = ParseTokenByBraces(token);
-
-            string[] delims = new string[] { ",\"" };
-
-            for (int i = 0; i < parsedInput.Count; i++)
+            for (int i = 0; i < count; i++)
             {
-                string[] topicInfo = parsedInput[i].Split(delims, StringSplitOptions.RemoveEmptyEntries);
+                JsonTopic objToAdd = JsonConvert.DeserializeObject<JsonTopic>(obj["response"]["topics"][i + 1].ToString());
 
-                topics.Add(convertInformationToTopic(topicInfo));
+                topics.Add(new VkBoardTopic {Id = objToAdd.Id, Title = objToAdd.Title, Comments = objToAdd.Comments});
             }
 
             return topics;
-        }
-
-        private VkBoardTopic convertInformationToTopic(string[] tokens)
-        {
-            int id = 0;
-            int comments = 0;
-            string title = "";
-            for (int i = 0; i < tokens.Length; i++)
-            {
-                string buff = "";
-
-                int typeOfToken = checkTopicProperty(tokens[i].Split(':')[0]);
-                if (typeOfToken == -1) continue;
-
-                string[] delims = new string[] { "\":" };
-
-                switch (typeOfToken)
-                {
-                    case 0:
-                        buff = tokens[i].Split(delims, StringSplitOptions.RemoveEmptyEntries)[1];
-                        id = int.Parse(buff);
-                        break;
-                    case 1:
-                        buff = tokens[i].Split(delims, StringSplitOptions.RemoveEmptyEntries)[1];
-                        comments = int.Parse(buff);
-                        break;
-                    case 2:
-                        buff = tokens[i].Split(delims, StringSplitOptions.RemoveEmptyEntries)[1];
-                        title = buff;
-                        break;
-                }
-            }
-
-            return new VkBoardTopic() { Id = id, Title = title, Comments = comments };
-        }
-
-        private int checkTopicProperty(string token)
-        {
-            if (token.IndexOf("id") != -1) return 0;
-            if (token.IndexOf("title") != -1) return 2;
-            if (token.IndexOf("comments") != -1) return 1;
-            return -1;
         }
     }
 
