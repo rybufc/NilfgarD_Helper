@@ -30,12 +30,12 @@
         {
             this.button1 = new System.Windows.Forms.Button();
             this.nicknameBox = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.getListOfBannedMembersButton = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.passwordTextBox = new System.Windows.Forms.TextBox();
             this.loginTextBox = new System.Windows.Forms.TextBox();
             this.button4 = new System.Windows.Forms.Button();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.informationTextBox = new System.Windows.Forms.TextBox();
             this.deleteBox = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button5 = new System.Windows.Forms.Button();
@@ -64,15 +64,15 @@
             this.nicknameBox.TabIndex = 5;
             this.nicknameBox.Text = "Введите ник на проверку...";
             // 
-            // button2
+            // getListOfBannedMembersButton
             // 
-            this.button2.Location = new System.Drawing.Point(12, 64);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(260, 23);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "Получить список забаненных пользователей...";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.getListOfBannedMembersButton.Location = new System.Drawing.Point(12, 64);
+            this.getListOfBannedMembersButton.Name = "getListOfBannedMembersButton";
+            this.getListOfBannedMembersButton.Size = new System.Drawing.Size(260, 23);
+            this.getListOfBannedMembersButton.TabIndex = 4;
+            this.getListOfBannedMembersButton.Text = "Получить список забаненных пользователей...";
+            this.getListOfBannedMembersButton.UseVisualStyleBackColor = false;
+            this.getListOfBannedMembersButton.Click += new System.EventHandler(this.getListOfBannedMembersButton_Click);
             // 
             // button3
             // 
@@ -111,16 +111,16 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // textBox4
+            // informationTextBox
             // 
-            this.textBox4.Location = new System.Drawing.Point(278, 12);
-            this.textBox4.Multiline = true;
-            this.textBox4.Name = "textBox4";
-            this.textBox4.ReadOnly = true;
-            this.textBox4.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox4.Size = new System.Drawing.Size(287, 298);
-            this.textBox4.TabIndex = 8;
-            this.textBox4.Text = "Информация...";
+            this.informationTextBox.Location = new System.Drawing.Point(278, 12);
+            this.informationTextBox.Multiline = true;
+            this.informationTextBox.Name = "informationTextBox";
+            this.informationTextBox.ReadOnly = true;
+            this.informationTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.informationTextBox.Size = new System.Drawing.Size(287, 298);
+            this.informationTextBox.TabIndex = 8;
+            this.informationTextBox.Text = "Информация...";
             // 
             // deleteBox
             // 
@@ -210,12 +210,12 @@
             this.Controls.Add(this.button5);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.deleteBox);
-            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.informationTextBox);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.loginTextBox);
             this.Controls.Add(this.passwordTextBox);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.getListOfBannedMembersButton);
             this.Controls.Add(this.nicknameBox);
             this.Controls.Add(this.button1);
             this.MaximumSize = new System.Drawing.Size(593, 500);
@@ -232,12 +232,12 @@
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox nicknameBox;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button getListOfBannedMembersButton;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TextBox passwordTextBox;
         private System.Windows.Forms.TextBox loginTextBox;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox informationTextBox;
         private System.Windows.Forms.TextBox deleteBox;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button button5;
