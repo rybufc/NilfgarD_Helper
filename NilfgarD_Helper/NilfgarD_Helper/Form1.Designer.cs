@@ -28,17 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.checkNicknameButton = new System.Windows.Forms.Button();
             this.nicknameBox = new System.Windows.Forms.TextBox();
             this.getListOfBannedMembersButton = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.ClearRequestThreadButton = new System.Windows.Forms.Button();
             this.passwordTextBox = new System.Windows.Forms.TextBox();
             this.loginTextBox = new System.Windows.Forms.TextBox();
-            this.button4 = new System.Windows.Forms.Button();
+            this.vkAuthButton = new System.Windows.Forms.Button();
             this.informationTextBox = new System.Windows.Forms.TextBox();
             this.deleteBox = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button5 = new System.Windows.Forms.Button();
+            this.deleteMessageButton = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -46,15 +46,15 @@
             this.openRequestFileButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // button1
+            // checkNicknameButton
             // 
-            this.button1.Location = new System.Drawing.Point(197, 90);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Проверить";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.checkNicknameButton.Location = new System.Drawing.Point(197, 90);
+            this.checkNicknameButton.Name = "checkNicknameButton";
+            this.checkNicknameButton.Size = new System.Drawing.Size(75, 23);
+            this.checkNicknameButton.TabIndex = 6;
+            this.checkNicknameButton.Text = "Проверить";
+            this.checkNicknameButton.UseVisualStyleBackColor = true;
+            this.checkNicknameButton.Click += new System.EventHandler(this.checkNicknameButton_Click);
             // 
             // nicknameBox
             // 
@@ -74,15 +74,15 @@
             this.getListOfBannedMembersButton.UseVisualStyleBackColor = false;
             this.getListOfBannedMembersButton.Click += new System.EventHandler(this.getListOfBannedMembersButton_Click);
             // 
-            // button3
+            // ClearRequestThreadButton
             // 
-            this.button3.Location = new System.Drawing.Point(12, 145);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(260, 23);
-            this.button3.TabIndex = 7;
-            this.button3.Text = "Подчистить тему заявок...";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.ClearRequestThreadButton.Location = new System.Drawing.Point(12, 145);
+            this.ClearRequestThreadButton.Name = "ClearRequestThreadButton";
+            this.ClearRequestThreadButton.Size = new System.Drawing.Size(260, 23);
+            this.ClearRequestThreadButton.TabIndex = 7;
+            this.ClearRequestThreadButton.Text = "Подчистить тему заявок...";
+            this.ClearRequestThreadButton.UseVisualStyleBackColor = true;
+            this.ClearRequestThreadButton.Click += new System.EventHandler(this.ClearRequestThreadButton_Click);
             // 
             // passwordTextBox
             // 
@@ -101,15 +101,15 @@
             this.loginTextBox.TabIndex = 1;
             this.loginTextBox.Text = "Login";
             // 
-            // button4
+            // vkAuthButton
             // 
-            this.button4.Location = new System.Drawing.Point(175, 10);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(97, 48);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "Войти";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.vkAuthButton.Location = new System.Drawing.Point(175, 10);
+            this.vkAuthButton.Name = "vkAuthButton";
+            this.vkAuthButton.Size = new System.Drawing.Size(97, 48);
+            this.vkAuthButton.TabIndex = 3;
+            this.vkAuthButton.Text = "Войти";
+            this.vkAuthButton.UseVisualStyleBackColor = true;
+            this.vkAuthButton.Click += new System.EventHandler(this.vkAuthButton_Click);
             // 
             // informationTextBox
             // 
@@ -138,15 +138,15 @@
             this.textBox2.Size = new System.Drawing.Size(260, 20);
             this.textBox2.TabIndex = 10;
             // 
-            // button5
+            // deleteMessageButton
             // 
-            this.button5.Location = new System.Drawing.Point(175, 203);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(97, 23);
-            this.button5.TabIndex = 11;
-            this.button5.Text = "Удалить заявку";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.deleteMessageButton.Location = new System.Drawing.Point(175, 203);
+            this.deleteMessageButton.Name = "deleteMessageButton";
+            this.deleteMessageButton.Size = new System.Drawing.Size(97, 23);
+            this.deleteMessageButton.TabIndex = 11;
+            this.deleteMessageButton.Text = "Удалить заявку";
+            this.deleteMessageButton.UseVisualStyleBackColor = true;
+            this.deleteMessageButton.Click += new System.EventHandler(this.deleteMessageButton_Click);
             // 
             // button6
             // 
@@ -207,17 +207,17 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);
-            this.Controls.Add(this.button5);
+            this.Controls.Add(this.deleteMessageButton);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.deleteBox);
             this.Controls.Add(this.informationTextBox);
-            this.Controls.Add(this.button4);
+            this.Controls.Add(this.vkAuthButton);
             this.Controls.Add(this.loginTextBox);
             this.Controls.Add(this.passwordTextBox);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.ClearRequestThreadButton);
             this.Controls.Add(this.getListOfBannedMembersButton);
             this.Controls.Add(this.nicknameBox);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.checkNicknameButton);
             this.MaximumSize = new System.Drawing.Size(593, 500);
             this.MinimumSize = new System.Drawing.Size(593, 39);
             this.Name = "Form1";
@@ -230,17 +230,17 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button checkNicknameButton;
         private System.Windows.Forms.TextBox nicknameBox;
         private System.Windows.Forms.Button getListOfBannedMembersButton;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button ClearRequestThreadButton;
         private System.Windows.Forms.TextBox passwordTextBox;
         private System.Windows.Forms.TextBox loginTextBox;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button vkAuthButton;
         private System.Windows.Forms.TextBox informationTextBox;
         private System.Windows.Forms.TextBox deleteBox;
         private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button deleteMessageButton;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Label label1;
