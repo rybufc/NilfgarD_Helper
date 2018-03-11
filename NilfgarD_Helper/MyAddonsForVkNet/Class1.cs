@@ -8,6 +8,9 @@ using VkNet.Utils;
 
 namespace MyAddonsForVkNet
 {
+    /// <summary>
+    ///     Формат ответа - комментария из обсуждения в формате JSon
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     internal struct JsonComment
     {
@@ -20,6 +23,9 @@ namespace MyAddonsForVkNet
         [JsonProperty("text")] public string Text { get; set; }
     }
 
+    /// <summary>
+    ///     Формат ответа-обсуждения в JSon
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     internal struct JsonTopic
     {
@@ -30,10 +36,21 @@ namespace MyAddonsForVkNet
         [JsonProperty("title")] public string Title { get; set; }
     }
 
+    /// <summary>
+    ///     Класс, дополняющий функционал библиотеки VkNet
+    /// </summary>
     public class VkApiExtensions
     {
+        /// <summary>
+        ///     Удаление комментария из обсуждения
+        /// </summary>
+        /// <param name="groupId">ID группы</param>
+        /// <param name="topicId">ID обсуждения</param>
+        /// <param name="messageId">ID сообщения</param>
+        /// <param name="vk">Класс для работы с api vkontakte</param>
         public void DeleteBoardComment(int groupId, int topicId, int messageId, VkApi vk)
         {
+            //отправка запроса на удаление комментария
             Thread.Sleep(200);
             var parameters = new VkParameters
             {
@@ -45,32 +62,51 @@ namespace MyAddonsForVkNet
             vk.Invoke("board.deleteComment", parameters);
         }
 
+        /// <summary>
+        ///     Получение количества коммантариев в обсуждении
+        /// </summary>
+        /// <param name="groupId">ID группы</param>
+        /// <param name="topicId">ID обсуждения</param>
+        /// <param name="vk">Класс для работы с api Vkontakte</param>
+        /// <returns></returns>
         private int GetNumberOfComments(int groupId, int topicId, VkApi vk)
         {
+            //Отправка запроса на получение списка комментариев
             var parameters = new VkParameters
             {
                 {"group_id", groupId},
                 {"topic_id", topicId}
             };
 
-            var token = vk.Invoke("board.getComments", parameters);
+            var response = vk.Invoke("board.getComments", parameters);
 
-            token = token.Split('[')[1];
+            //Парсим количество участников из ответа сервера
+            response = response?.Split('[')[1];
 
             Thread.Sleep(200);
 
-            return int.Parse(token.Split(',')[0]);
+            return int.Parse(response.Split(',')[0]);
         }
 
+        /// <summary>
+        ///     Получение списка комментариев из обсуждения
+        /// </summary>
+        /// <param name="groupId">ID группы</param>
+        /// <param name="topicId">ID обсуждения</param>
+        /// <param name="vk">Класс для работы с api vkontakte</param>
+        /// <returns></returns>
         public List<VkBoardMessage> GetMessageList(int groupId, int topicId, VkApi vk)
         {
-            var tokens = new List<string>();
+            //инициализируем список ответов(vkontakte может отослать не более 100 комментариев за запрос) на запросы
+            var responses = new List<string>();
+            //инициализируем список сообщений
             var messages = new List<JsonComment>();
 
             var counter = GetNumberOfComments(groupId, topicId, vk);
 
             var offset = 0;
 
+            //получение списка сообщений
             while (counter > 0)
             {
                 var counterToAdd = 0;
@@ -88,9 +124,9 @@ namespace MyAddonsForVkNet
                 };
                 counter -= 100;
                 offset += 100;
-                tokens.Add(vk.Invoke("board.getComments", parameters));
+                responses.Add(vk.Invoke("board.getComments", parameters));
 
-                var obj = JObject.Parse(tokens.Last());
+                var obj = JObject.Parse(responses.Last());
 
                 for (var i = 0; i < counterToAdd; i++)
                 {
@@ -116,17 +152,26 @@ namespace MyAddonsForVkNet
             return comments;
         }
 
+        /// <summary>
+        ///     Получение списка обсуждений группы
+        /// </summary>
+        /// <param name="groupId">ID группы вконтакте</param>
+        /// <param name="vk">Класс для работы с api vkontakte</param>
+        /// <returns></returns>
         public List<VkBoardTopic> GetTopicList(int groupId, VkApi vk)
         {
+            //Создаём параметр для запроса к api vkontakte
             var parameters = new VkParameters
             {
                 {"group_id", groupId}
             };
 
-            var token = vk.Invoke("board.getTopics", parameters);
+            //Отравка запроса к api vkontakte
+            var response = vk.Invoke("board.getTopics", parameters);
 
+            //Получение списка групп из ответа
             var topics = new List<VkBoardTopic>();
-            var obj = JObject.Parse(token);
+            var obj = JObject.Parse(response);
             var count = JsonConvert.DeserializeObject<int>(obj["response"]["topics"][0].ToString());
 
             for (var i = 0; i < count; i++)
@@ -140,6 +185,7 @@ namespace MyAddonsForVkNet
         }
     }
 
+    //Класс обсуждения
     public class VkBoardTopic
     {
         public int Id { get; set; }
@@ -147,6 +193,7 @@ namespace MyAddonsForVkNet
         public int Comments { get; set; }
     }
 
+    //Класс сообщения из обсуждения
     public class VkBoardMessage
     {
         public int Date { get; set; }
